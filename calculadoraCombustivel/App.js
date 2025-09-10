@@ -8,6 +8,7 @@ export default function App() {
   const [Alcool,setAlcool] = useState()
   const [gasolina,setGasolina] = useState()
   
+  
   function calcular(){
     let alv = Alcool
     let gasl = gasolina 
