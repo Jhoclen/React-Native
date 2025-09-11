@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View , Image, TextInput, Button} from 'react-native';
+import {Container,Titulo,Label,Img,Input,Button} from './src/assets/styler'
 import logo from './assets/bomba-de-gasolina.png'
 
 
@@ -10,22 +10,32 @@ export default function App() {
   
   
   function calcular(){
-    let alv = Alcool
-    let gasl = gasolina 
-    var n = null
+
   
-    if(alv || gasl){
-      var al = alv.replace(',','.')
-      var gas = gasl.replace(',','.')
-    }else{
-      al = n
-      gas = n
+    function moneyNumber(value) {
+     if (!value) return 0;
+
+        
+     let numericString = value.replace(/[^0-9,.-]/g, '');
+
+     numericString = numericString.replace(/\./g, '');
+        
+     numericString = numericString.replace(',', '.');
+
+     const number = parseFloat(numericString);
+
+     return isNaN(number) ? 0 : number;
     }
+    let alv = moneyNumber(Alcool)
+    let gasl =  moneyNumber(gasolina) 
+    var n = null
+    var al = alv
+    var gas = gasl
     var resultado = al/gas
 
-    if(al == 0 || al == n || gas == 0 || gas == n || gas < 1 || al < 1  ){
+    if(al == 0 || al == n || gas == 0 || gas == n || gas < 1 || al < 1 ){
 
-      alert(" valor inválido")
+      alert("valor inválido")
       
     }else {
       if(resultado < 0.7){
@@ -34,79 +44,46 @@ export default function App() {
         alert("a recomendação é abastecer com gasolina")
       }
     }
+  
+    setAlcool('')
+    setGasolina('')
     
   }
 
   return (
 
-    
+    <Container>
+      <Img source={logo}  />
+      <Titulo>Qual a melhor opção</Titulo>
 
-    <View style={styles.container}>
-      <Image source={logo} style={styles.img} />
-      <Text style={styles.Text}>Qual a melhor opção</Text>
-
-      <Text style={styles.label}>Álcool (preço por litro):</Text>
-      <TextInput
+      <Label>Álcool (preço por litro):</Label>
+      <Input
       value={Alcool}
       onChangeText={text => setAlcool(text)} 
-      keyboardType='numeric'
-      style={styles.in} 
+      keyboardType='numeric' 
       placeholder='Álcool'>
-      </TextInput>
+      
+      </Input>
 
-      <Text style={styles.label}>
+      <Label>
         Gasolina (preço por litro):
-      </Text>
+      </Label>
 
-      <TextInput 
+      <Input 
       value={gasolina}
       onChangeText={text=>setGasolina(text)}
-      keyboardType='numeric' 
-      style={styles.in}  
+      keyboardType='numeric'  
       placeholder='gasolina'>
-      </TextInput>
-      <Button style={styles.but} title='calcular' onPress={calcular}></Button>
-    </View>
+
+      </Input>
+
+      <Button 
+       title='calcular'
+       onPress={calcular}
+       color='black'
+      ></Button>
+    </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2e85d6a2',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  Text:{
-    fontSize: 36,
-    padding:10,
-    top: -1,
-    fontWeight: 'bold'
-    
-  },
-  img:{
-    width: 200,
-    height:200,
-    justifyContent:'center',
-    alignItems:'center',
-    top: -30,
-    left:15
-  },
-  in:{
-    backgroundColor:'rgba(235, 235, 224, 1)',
-    width:300,
-    textAlign: 'center',
-    borderRadius:30,
-    marginBottom:15
 
-  },
-  label:{
-    fontSize:20,
-    padding:16
-  },
-  but:{
-    
-  }
-
-
-});
