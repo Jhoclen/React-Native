@@ -26,11 +26,10 @@ export default function App() {
 
      return isNaN(number) ? 0 : number;
     }
-    let alv = moneyNumber(Alcool)
-    let gasl =  moneyNumber(gasolina) 
+
     var n = null
-    var al = alv
-    var gas = gasl
+    var al = moneyNumber(Alcool)
+    var gas = moneyNumber(gasolina) 
     var resultado = al/gas
 
     if(al == 0 || al == n || gas == 0 || gas == n || gas < 1 || al < 1 ){
