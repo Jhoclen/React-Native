@@ -15,7 +15,7 @@ Tela 3: Pré-Triagem e Confirmação	Um formulário simples (inputs de texto e b
  import { Calendar, Syringe, MapPin, BookOpen, Bell } from "lucide-react";
 
 
- import { FlatList, TouchableOpacity } from "react-native"
+import { FlatList, TouchableOpacity } from "react-native"
 import { Text } from "../components/Text";
 import { agenda } from "../../mocks/agenda"
 import { Container } from "./styles";
