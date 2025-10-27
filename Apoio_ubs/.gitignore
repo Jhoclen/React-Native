@@ -8,7 +8,7 @@ node_modules/
 dist/
 web-build/
 expo-env.d.ts
-teste.js
+teste1.js
 # Native
 .kotlin/
 *.orig.*
