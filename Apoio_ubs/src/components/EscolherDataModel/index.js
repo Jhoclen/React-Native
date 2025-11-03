@@ -1,5 +1,7 @@
 import CustomModal from "../CustomModal";
 import { FlatList  } from "react-native"
+import { View } from "react-native";
+import {Text} from '../Text'
 
 export default function EscolherDataModel({visible, onClose, agenda,}){
     return(
@@ -9,7 +11,10 @@ export default function EscolherDataModel({visible, onClose, agenda,}){
             keyExtractor={agenda => agenda.id}
              renderItem={({ item : agenda}) =>(
 
-                null
+                <View>
+                <Text size={30}>testando</Text>
+
+                </View>   
              )}
             />
 
