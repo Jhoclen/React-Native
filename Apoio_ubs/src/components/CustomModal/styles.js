@@ -9,8 +9,12 @@ export const Overlay = styled.View`
 `;
 
 export const ModalBody = styled.View`
-  background-color: #FFF;
+  flex: 1;
+  background-color: #fff;
   width: 100%;
+  max-height: 90%;
   padding: 24px;
   border-radius: 8px;
+  align-self: center;
 `;
+

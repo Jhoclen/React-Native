@@ -22,7 +22,7 @@ export default function DataModal({visible, onClose, agenda, hendlerService}){
                         titulo={agenda.Servico}
                         description ={agenda.description}
                         icon={agenda.icon}
-                        onClick={()=>{hendlerService(agenda.id)}}
+                        onClick={()=>{hendlerService(agenda.id,agenda.Servico)}}
                         >
 
                         </Caixa>
