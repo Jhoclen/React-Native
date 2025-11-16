@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { View, FlatList, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text } from "../../components/Text";
+
+import { getBookings, cancelarBooking } from "../../services/db";
 
 export default function MeusAgendamentos() {
     const [agendamentos, setAgendamentos] = useState([]);
@@ -11,8 +12,12 @@ export default function MeusAgendamentos() {
     }, []);
 
     async function carregarAgendamentos() {
-        const data = await AsyncStorage.getItem("@agendamentos");
-        if (data) setAgendamentos(JSON.parse(data));
+        try {
+            const data = await getBookings();
+            setAgendamentos(data);
+        } catch (error) {
+            console.log("Erro ao carregar agendamentos:", error);
+        }
     }
 
     function formatarData(data, hora) {
@@ -28,24 +33,21 @@ export default function MeusAgendamentos() {
         return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
     }
 
-    function confirmarCancelamento(index) {
+    function confirmarCancelamento(idBooking) {
         Alert.alert(
             "Cancelar Agendamento",
             "Tem certeza que deseja cancelar este agendamento?",
             [
                 { text: "Não", style: "cancel" },
-                { text: "Sim", onPress: () => cancelarAgendamento(index) }
+                { text: "Sim", onPress: () => cancelar(idBooking) }
             ]
         );
     }
 
-    async function cancelarAgendamento(index) {
+    async function cancelar(idBooking) {
         try {
-            const novaLista = [...agendamentos];
-            novaLista.splice(index, 1); // remove o item selecionado
-
-            await AsyncStorage.setItem("@agendamentos", JSON.stringify(novaLista));
-            setAgendamentos(novaLista);
+            await cancelarBooking(idBooking);
+            await carregarAgendamentos(); // atualiza lista após cancelar
         } catch (error) {
             console.log("Erro ao cancelar:", error);
         }
@@ -58,16 +60,18 @@ export default function MeusAgendamentos() {
             <FlatList
                 style={{ marginTop: 20 }}
                 data={agendamentos}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item, index }) => (
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
                     <View style={styles.card}>
                         <Text weight="600">{item.servico}</Text>
 
+                        <Text>Nome: {item.nome}</Text>
+                        <Text>CPF: {item.cpf}</Text>
                         <Text>{formatarData(item.data, item.hora)}</Text>
-                        <Text>Prioridade: {item.prioridade}</Text>
+                        <Text>Prioridade: {item.prioridade || "Nenhuma"}</Text>
 
                         <TouchableOpacity
-                            onPress={() => confirmarCancelamento(index)}
+                            onPress={() => confirmarCancelamento(item.id)}
                             style={styles.cancelButton}
                         >
                             <Text color="#FFF" weight="600">Cancelar</Text>

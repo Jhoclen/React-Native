@@ -3,9 +3,10 @@ import { Text } from "../Text"
 import { Container, Boxservices, Icon, ServiceDescription } from "./styles";
 import Agenda from "../../assets/image/agenda.png"
 import ListIcon from "../../assets/image/check.png";
+import FilaIcon from "../../assets/image/fila.png";
 
 
-export default function Services({ onClickAgendar, onClickMeusAgendamentos }) {
+export default function Services({ onClickAgendar, onClickMeusAgendamentos, onClickFila }) {
     return (
         <Container>
             <Text weight="600">Nossos Serviços</Text>
@@ -22,7 +23,15 @@ export default function Services({ onClickAgendar, onClickMeusAgendamentos }) {
                 <Icon source={ListIcon} />
                 <ServiceDescription>
                     <Text weight="600">Meus Agendamentos</Text>
-                    <Text size={12}>Ver histórico e próximos agendamentos</Text>
+                    <Text size={12}>Ver próximos agendamentos</Text>
+                </ServiceDescription>
+            </Boxservices>
+
+            <Boxservices onPress={onClickFila}>
+                <Icon source={FilaIcon} />
+                <ServiceDescription>
+                    <Text weight="600">Fila de Atendimento</Text>
+                    <Text size={12}>Veja a ordem de chamadas</Text>
                 </ServiceDescription>
             </Boxservices>
 
