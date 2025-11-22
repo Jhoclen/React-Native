@@ -15,7 +15,7 @@ export function gerarAgenda(meses = 3) {
       const horarios = gerarHorarios("07:00", "16:00", 30);
 
       horarios.forEach(hora => {
-        ["Consulta", "Exame de Próstata", "Vacina", "Medição de Pressão/Glicose"].forEach(servico => {
+        ["Consulta", "Exame de Próstata", "Vacina", "Medição"].forEach(servico => {
 
           agendaGerada.push({
             id: idCounter++,

@@ -18,9 +18,9 @@ export default function PrioridadeModal({ visible, onClose, onFinish }) {
   const calcularPrioridade = () => {
     let score = 0;
 
-    if (respostas.febre === "sim") score += 2;
-    if (respostas.sangramento === "sim") score += 3;
-    if (respostas.idoso === "sim") score += 1;
+    if (respostas.febre === "sim") score += 3;
+    if (respostas.sangramento === "sim") score += 4;
+    if (respostas.idoso === "sim") score += 2;
     if (respostas.gestante === "sim") score += 2;
 
     let nivel = "Normal";
@@ -34,10 +34,7 @@ export default function PrioridadeModal({ visible, onClose, onFinish }) {
   const renderOpcoes = (campo) => (
     <View style={styles.row}>
       <TouchableOpacity
-        style={[
-          styles.button,
-          respostas[campo] === "sim" && styles.selected
-        ]}
+        style={[styles.button, respostas[campo] === "sim" && styles.selected]}
         onPress={() => handleSelect(campo, "sim")}
       >
         <Text weight="600" color={respostas[campo] === "sim" ? "#FFF" : "#000"}>
@@ -46,10 +43,7 @@ export default function PrioridadeModal({ visible, onClose, onFinish }) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          styles.button,
-          respostas[campo] === "nao" && styles.selected
-        ]}
+        style={[styles.button, respostas[campo] === "nao" && styles.selected]}
         onPress={() => handleSelect(campo, "nao")}
       >
         <Text weight="600" color={respostas[campo] === "nao" ? "#FFF" : "#000"}>
@@ -62,7 +56,9 @@ export default function PrioridadeModal({ visible, onClose, onFinish }) {
   return (
     <CustomModal visible={visible} onClose={onClose}>
       <View style={styles.container}>
-        <Text weight="600" size={18}>Questionário de Prioridade</Text>
+        <Text weight="600" size={18}>
+          Questionário de Prioridade
+        </Text>
 
         <Text style={styles.question}>Está com febre?</Text>
         {renderOpcoes("febre")}
@@ -77,7 +73,9 @@ export default function PrioridadeModal({ visible, onClose, onFinish }) {
         {renderOpcoes("gestante")}
 
         <TouchableOpacity style={styles.finishBtn} onPress={calcularPrioridade}>
-          <Text weight="600" color="#FFF">Calcular Prioridade</Text>
+          <Text weight="600" color="#FFF">
+            Calcular Prioridade
+          </Text>
         </TouchableOpacity>
       </View>
     </CustomModal>
@@ -89,14 +87,14 @@ const styles = StyleSheet.create({
   question: { marginTop: 20, marginBottom: 10 },
   row: {
     flexDirection: "row",
-    gap: 20
+    gap: 20,
   },
   button: {
     padding: 12,
     backgroundColor: "#E2E8F0",
     borderRadius: 10,
     width: 100,
-    alignItems: "center"
+    alignItems: "center",
   },
   selected: {
     backgroundColor: "#0EA5E9",
@@ -106,6 +104,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#0EA5E9",
     padding: 15,
     borderRadius: 10,
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
