@@ -2,7 +2,7 @@
 import { Text } from "../Text"
 import { Container, Boxservices, Icon, ServiceDescription } from "./styles";
 import Agenda from "../../assets/image/agenda.png"
-import ListIcon from "../../assets/image/check.png";
+import ListIcon from "../../assets/image/verificado.png";
 import FilaIcon from "../../assets/image/fila.png";
 
 

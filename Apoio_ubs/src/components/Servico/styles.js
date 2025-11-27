@@ -20,7 +20,7 @@ export const Boxservices = styled.TouchableOpacity`
 export const Icon = styled.Image`
     width: 60px;
     height: 60px;
-    top: 10px;
+    top: 5px;
 `;
 
 export const ServiceDescription = styled.View`
